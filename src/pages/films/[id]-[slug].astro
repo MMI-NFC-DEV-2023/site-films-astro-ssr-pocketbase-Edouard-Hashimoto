@@ -15,8 +15,8 @@ const film = await Astro.locals.pb.collection<FilmsResponse<{producteur : Person
 <div>
         <h2>Film : {film.titre}</h2>
         <p>Année : {film.date_sortie}</p>
-        {film.expand?.producteur && <p>Producteur : {film.expand?.producteur.prenom} {film.expand?.producteur.nom}</p>}
-        {film.expand?.scenariste && <p>Scénariste : {film.expand?.scenariste.map(s => <span> {s.nom} {s.prenom + " "}</span>)}</p>}
+        {film.expand?.producteur && <p>Producteur : <LinkPersonne {...film.expand?.producteur!} /></p>}
+        {film.expand?.scenariste && <p>Scénariste : {film.expand?.scenariste.map(s => <LinkPersonne {...s}/>)}</p>}
         <p>Durée : {film.duree}</p>
         {film.expand?.role && <p>Rôles : {film.expand?.role.map(r => <span>{r.nom_role + " "}</span><span>Joué par : <LinkPersonne {...r.expand?.acteur!} /></span>)}</p>}
 </div>
